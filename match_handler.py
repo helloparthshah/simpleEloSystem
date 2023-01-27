@@ -21,8 +21,15 @@ class MatchHandler:
             factor = 1/factor
         elif (mov < 0 and pNumber != winner) or (mov > 0 and pNumber == winner):
             factor = factor
+        if mov == 1:
+            factor = 1
         new_a = a + 32 * (1-winner - Pa)*factor
         new_b = b + 32 * (winner - Pb)*factor
+        # elo can't be less than 0
+        if new_a < 0:
+            new_a = 0
+        if new_b < 0:
+            new_b = 0
         return new_a, new_b
 
     def play_team(self):
